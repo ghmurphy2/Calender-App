@@ -27,6 +27,8 @@ setInterval( function(){
         setBackgroundByTime(timeEl[time], hours[hour], now);
     }}, 1000 );
 
+    console.log("setInterval")
+
 for(var time in hours) {
     // Create the hour element, stick with time or reverse?
     console.log(hours);
@@ -75,3 +77,12 @@ function setBackground(input, time, now) {
             input.addClass("past");
         }
     }
+
+    function savedTasks() {
+        let saveData = {};
+        for(timeCurrent in time) {
+            saveData[timeCurrent[time]] = "";
+        }
+        localStorage.setItem("task-track", JSON.stringify(saveData));
+    }
+    
