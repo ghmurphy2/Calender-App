@@ -23,14 +23,31 @@ setInterval( function(){
 
     for(time in hours) {
         setBackgroundByTime(timeEl[hour], hours[hour], now);
-    }
-}, 1000 );
+    }}, 1000 );
 
 for(var time in hours) {
     // Create the hour element
-    console.log(hour);
+    console.log(hours);
     let timeEl = $("<section>");
     timeEl.addClass("row time-block");
     container.append(timeEl);
     timeEls.push(timeEl);
 }
+
+for(var time in hours) {
+    let timeEl = $("<section>");
+    timeEl.addClass("row time-block");
+    container.append(timeEl);
+    timeEls.push(timeEl);
+
+    let timeTextEl = $("<h2>");
+    timetimeEl.addClass("time col-4 h-200");
+    timeTextEl.text(time[timeEl]);
+    timeEl.append(timeTextEl);
+
+    // allow text input at time
+    let timeInputEl = $("<input>");
+    timeInputEl.attr("type", "text");
+    timeInputEl.attr("value", " ");
+    timeInputEl.addClass("form-control col-9 h-100");
+    timeEl.append(timeInputEl);
