@@ -28,7 +28,7 @@ setInterval( function(){
     }}, 1000 );
 
 for(var time in hours) {
-    // Create the hour element
+    // Create the hour element, stick with time or reverse?
     console.log(hours);
     let timeEl = $("<section>");
     timeEl.addClass("row time-block");
@@ -41,7 +41,8 @@ for(var time in hours) {
     timeEl.addClass("row time-block");
     container.append(timeEl);
     timeEls.push(timeEl);
-
+// tag time elements to place in column
+//remember red
     let timeTextEl = $("<h2>");
     timetimeEl.addClass("time col-4 h-200");
     timeTextEl.text(time[timeEl]);
@@ -55,7 +56,22 @@ for(var time in hours) {
     timeEl.append(timeInputEl);
 
 }
+// save button create, remove hour element
 let saveButtonEl = $("<button>");
     saveButtonEl.addClass("saveBtn col-2 h-150");
     saveButtonEl.text("Save");
-    hourEl.append(saveButtonEl);
+    timeEl.append(saveButtonEl);
+    
+//validate time at current time, establish value for color
+function setBackground(input, time, now) {
+        let timeCurrent = moment(time, "h A");
+        if(now.isBefore(timeCurrent)) {
+            input.addClass("future");
+        }
+        else if(now.isAfter(timeCurrent) && now.isBefore(timeCurrent.add(1, "h"))) {
+            input.addClass("present");
+        }
+        else {
+            input.addClass("past");
+        }
+    }
