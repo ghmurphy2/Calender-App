@@ -24,12 +24,12 @@ setInterval( function(){
     setCurrentDay(now);
 
     for(time in hours) {
-        setBackgroundByTime(timeEl[time], hours[hour], now);
+        setBackgroundByTime(timeEls[time], hours[hour], now);
     }}, 1000 );
 
     console.log("setInterval")
 
-for(var time in hours) {
+for(var time in timeEls) {
     // Create the hour element, stick with time or reverse?
     console.log(hours);
     let timeEl = $("<section>");
