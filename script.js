@@ -8,7 +8,18 @@
 //setInterval(displayTime, 1000);
 //establsih timer for display
 //console.log("currentTime")
-
+//am pm removal, palce in container
+//style changes?
+//setCurrentDay(now);
+// Create the hour element, stick with time or reverse?
+// tag time elements to place in column
+//remember red
+// allow text input at time
+// save button create, remove hour element
+ //validate time at current time, establish value for color
+// push tasks to local storage
+// track on click, tie time and task and set item
+// reformate for simplier function
 var militaryTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
 var timeEl = [];
 var container = $(".container");
@@ -46,19 +57,19 @@ for(var time in militaryTime) {
     hourEl.append(timeLabelEl);
 
     
-    let timeInputEl = $("<input>");
-    timeInputEl.attr("type", "text");
-    timeInputEl.attr("value", "");
-    timeInputEl.addClass("form-control col-9 h-100");
-    hourEl.append(timeInputEl);
+    let hourInputEl = $("<input>");
+    hourInputEl.attr("type", "text");
+    hourInputEl.attr("value", "");
+    hourInputEl.addClass("form-control col-9 h-100");
+    hourEl.append(hourInputEl);
 
     
     let saveData = JSON.parse(localStorage.getItem("task-tracker"));
     if(saveData[militaryTime[time]]) {
-        timeInputEl.val(saveData[militaryTime[time]]);
+        hourInputEl.val(saveData[militaryTime[time]]);
     }
    
-    setBackgroundByTime(timeInputEl, militaryTime[time], currentTime);
+    setBackgroundByTime(hourInputEl, militaryTime[time], currentTime);
 
     
     let saveButtonEl = $("<button>");
@@ -80,18 +91,7 @@ for(var time in militaryTime) {
         localStorage.setItem("task-tracker", JSON.stringify(saveData));
     } );
 }
-//am pm removal, palce in container
-//style changes?
-//setCurrentDay(now);
-// Create the hour element, stick with time or reverse?
-// tag time elements to place in column
-//remember red
-// allow text input at time
-// save button create, remove hour element
- //validate time at current time, establish value for color
-// push tasks to local storage
-// track on click, tie time and task and set item
-// reformate for simplier function
+
 
 function initializeStorage() {
     let saveData = {};
@@ -101,3 +101,19 @@ function initializeStorage() {
     localStorage.setItem("task-tracker", JSON.stringify(saveData));
 }
 
+function setCurrentDay(now) {
+    timeEl.text(now.format("MM DD, YYYY"));
+}
+
+function setBackgroundByTime(input, hour, now) {
+    let timeTemp = moment(hour, "h A");
+    if(now.isBefore(timeTemp)) {
+        input.addClass("future");
+    }
+    else if(now.isAfter(timeTemp) && now.isBefore(timeTemp.add(1, "h"))) {
+        input.addClass("now");
+    }
+    else {
+        input.addClass("past");
+    }
+}
