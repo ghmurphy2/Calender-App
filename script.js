@@ -8,21 +8,23 @@
 //setInterval(displayTime, 1000);
 //establsih timer for display
 //console.log("currentTime")
+//am pm removal, palce in container
+//style changes?
 
 var time = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
 var timeEls = [];
 var container = $(".container");
 var current = moment();
 var timeEl = $("#currentTime");
-
-setCurrentDay(now);
+var dayCurrent = timeEl
+//setCurrentDay(now);
 
 setInterval( function(){
     now = moment();
     setCurrentDay(now);
 
     for(time in hours) {
-        setBackgroundByTime(timeEl[hour], hours[hour], now);
+        setBackgroundByTime(timeEl[time], hours[hour], now);
     }}, 1000 );
 
 for(var time in hours) {
@@ -51,3 +53,9 @@ for(var time in hours) {
     timeInputEl.attr("value", " ");
     timeInputEl.addClass("form-control col-9 h-100");
     timeEl.append(timeInputEl);
+
+}
+let saveButtonEl = $("<button>");
+    saveButtonEl.addClass("saveBtn col-2 h-150");
+    saveButtonEl.text("Save");
+    hourEl.append(saveButtonEl);
