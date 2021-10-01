@@ -26,13 +26,13 @@ setInterval( function(){
     }
 }, 1000 );
 
-for(var hour in hours) {
+for(var time in hours) {
     // Create the hour element
     console.log(hour);
-    let hourEl = $("<section>");
-    hourEl.addClass("row time-block");
-    container.append(hourEl);
-    hourEls.push(hourEl);
+    let timeEl = $("<section>");
+    timeEl.addClass("row time-block");
+    container.append(timeEl);
+    timeEls.push(timeEl);
 
 
 
