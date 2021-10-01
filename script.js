@@ -77,12 +77,24 @@ function setBackground(input, time, now) {
             input.addClass("past");
         }
     }
-
+// push tasks to local storage
     function savedTasks() {
         let saveData = {};
         for(timeCurrent in time) {
             saveData[timeCurrent[time]] = "";
         }
-        localStorage.setItem("task-track", JSON.stringify(saveData));
+        localStorage.setItem("task-tracker", JSON.stringify(saveData));
     }
+
+console.log("task-tracker");
     
+// track on click, tie time and task and set item
+// reformate for simplier function
+    saveButtonEl.click( function(event) {
+        let inputText = $(event.target).parent().children("input").val();
+        let time = $(event.target).parent().children("h2").text();
+    let saveData = JSON.parse(localStorage.getItem("task-tracker"));
+        saveData[hour] = inputText;
+        localStorage.setItem("task tracker", JSON.stringify(saveData));
+    } );
+console.log("task-tracker");
