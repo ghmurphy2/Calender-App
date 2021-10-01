@@ -4,18 +4,38 @@
 // red out past blocks
 // allow block input text
 // run timer on blocks? alert popups at intervels?
-var hours = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
-var hourEls = [];
-var container = $(".container");
-var now = momentNow();
-var timeEl = $("#currentDay");
-
 // establish timer on load
-setInterval(displayTime, 1000);
+//setInterval(displayTime, 1000);
 //establsih timer for display
-function displayTime() {
-    let todayOnInterval = moment();
-    let timeNow = todayOnInterval.format('HH[:]mm[:]ss');
-    $('#currentTime').text(timeEl);
-}
-console.log("displayTime")
+//console.log("currentTime")
+
+var time = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+var timeEls = [];
+var container = $(".container");
+var current = moment();
+var timeEl = $("#currentTime");
+
+setCurrentDay(now);
+
+setInterval( function(){
+    now = moment();
+    setCurrentDay(now);
+
+    for(hour in hours) {
+        setBackgroundByTime(timeEl[hour], hours[hour], now);
+    }
+}, 1000 );
+
+for(var hour in hours) {
+    // Create the hour element
+    console.log(hour);
+    let hourEl = $("<section>");
+    hourEl.addClass("row time-block");
+    container.append(hourEl);
+    hourEls.push(hourEl);
+
+
+
+// format time and day
+//function setCurrentDay(now) {
+    //timeEl.text(now.format("MM DD, YYYY"));
