@@ -1,17 +1,11 @@
 // create hour blocks
-// start at current time, query api for time see example
-// apply current time to sheet
-// red out past blocks
+
 // allow block input text
 // run timer on blocks? alert popups at intervels?
 // establish timer on load
 //setInterval(displayTime, 1000);
-//establsih timer for display
-//console.log("currentTime")
-//am pm removal, palce in container
-//style changes?
-//setCurrentDay(now);
-// Create the hour element, stick with time or reverse?
+
+
 // tag time elements to place in column
 //remember red
 // allow text input at time
@@ -25,7 +19,8 @@ var timeEl = [];
 var container = $(".container");
 var currentTime = moment();
 var timeEl = $("#currentDay");
-
+//setCurrentDay(now);
+// Create the hour element, stick with time or reverse?
 setCurrentDay(currentTime);
 
 setInterval( function(){
@@ -42,7 +37,10 @@ setInterval( function(){
 if(!localStorage.getItem("task-tracker")) {
     initializeStorage();
 }
-
+//establsih timer for display
+//console.log("currentTime")
+//am pm removal, palce in container
+//style changes?
 for(var time in militaryTime) {
     
     let hourEl = $("<section>");
@@ -50,16 +48,18 @@ for(var time in militaryTime) {
     container.append(hourEl);
     timeEl.push(hourEl);
 
-    
+    //added new hour var
     let timeLabelEl = $("<h2>");
     timeLabelEl.addClass("hour col-2 h-100");
     timeLabelEl.text(militaryTime[time]);
     hourEl.append(timeLabelEl);
-
+//why doesnt time hour old work?
+//label select neeeds hour, can change but no reason
     
     let hourInputEl = $("<input>");
     hourInputEl.attr("type", "text");
     hourInputEl.attr("value", "");
+    // select for text
     hourInputEl.addClass("form-control col-9 h-100");
     hourEl.append(hourInputEl);
 
@@ -68,7 +68,9 @@ for(var time in militaryTime) {
     if(saveData[militaryTime[time]]) {
         hourInputEl.val(saveData[militaryTime[time]]);
     }
-   
+   // start at current time, query api for time see example
+// apply current time to sheet
+// red out past blocks
     setBackgroundByTime(hourInputEl, militaryTime[time], currentTime);
 
     
