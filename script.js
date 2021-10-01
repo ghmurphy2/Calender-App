@@ -18,3 +18,4 @@ function displayTime() {
     let timeNow = todayOnInterval.format('HH[:]mm[:]ss');
     $('#currentTime').text(timeEl);
 }
+console.log("displayTime")
