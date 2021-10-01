@@ -8,93 +8,96 @@
 //setInterval(displayTime, 1000);
 //establsih timer for display
 //console.log("currentTime")
-//am pm removal, palce in container
-//style changes?
 
-var time = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
-var timeEls = [];
+var militaryTime = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+var timeEl = [];
 var container = $(".container");
-var current = moment();
-var timeEl = $("#currentTime");
-var dayCurrent = timeEl
-//setCurrentDay(now);
+var currentTime = moment();
+var timeEl = $("#currentDay");
+
+setCurrentDay(currentTime);
 
 setInterval( function(){
-    now = moment();
-    setCurrentDay(now);
+    currentTime = moment();
+    
+    setCurrentDay(currentTime);
 
-    for(time in hours) {
-        setBackgroundByTime(timeEls[time], hours[hour], now);
-    }}, 1000 );
+    for(time in militaryTime) {
+        setBackgroundByTime(timeEl[time], militaryTime[time], currentTime);
+    }
+}, 1000 );
 
-    console.log("setInterval")
 
-for(var time in timeEls) {
-    // Create the hour element, stick with time or reverse?
-    console.log(hours);
-    let timeEl = $("<section>");
-    timeEl.addClass("row time-block");
-    container.append(timeEl);
-    timeEls.push(timeEl);
+if(!localStorage.getItem("task-tracker")) {
+    initializeStorage();
 }
 
-for(var time in hours) {
-    let timeEl = $("<section>");
-    timeEl.addClass("row time-block");
-    container.append(timeEl);
-    timeEls.push(timeEl);
-// tag time elements to place in column
-//remember red
-    let timeTextEl = $("<h2>");
-    timetimeEl.addClass("time col-4 h-200");
-    timeTextEl.text(time[timeEl]);
-    timeEl.append(timeTextEl);
+for(var time in militaryTime) {
+    
+    let hourEl = $("<section>");
+    hourEl.addClass("row time-block");
+    container.append(hourEl);
+    timeEl.push(hourEl);
 
-    // allow text input at time
+    
+    let timeLabelEl = $("<h2>");
+    timeLabelEl.addClass("hour col-2 h-100");
+    timeLabelEl.text(militaryTime[time]);
+    hourEl.append(timeLabelEl);
+
+    
     let timeInputEl = $("<input>");
     timeInputEl.attr("type", "text");
-    timeInputEl.attr("value", " ");
+    timeInputEl.attr("value", "");
     timeInputEl.addClass("form-control col-9 h-100");
-    timeEl.append(timeInputEl);
+    hourEl.append(timeInputEl);
 
-}
-// save button create, remove hour element
-let saveButtonEl = $("<button>");
-    saveButtonEl.addClass("saveBtn col-2 h-150");
+    
+    let saveData = JSON.parse(localStorage.getItem("task-tracker"));
+    if(saveData[militaryTime[time]]) {
+        timeInputEl.val(saveData[militaryTime[time]]);
+    }
+   
+    setBackgroundByTime(timeInputEl, militaryTime[time], currentTime);
+
+    
+    let saveButtonEl = $("<button>");
+    saveButtonEl.addClass("saveBtn col-1 h-100");
     saveButtonEl.text("Save");
-    timeEl.append(saveButtonEl);
-    
-//validate time at current time, establish value for color
-function setBackground(input, time, now) {
-        let timeCurrent = moment(time, "h A");
-        if(now.isBefore(timeCurrent)) {
-            input.addClass("future");
-        }
-        else if(now.isAfter(timeCurrent) && now.isBefore(timeCurrent.add(1, "h"))) {
-            input.addClass("present");
-        }
-        else {
-            input.addClass("past");
-        }
-    }
-// push tasks to local storage
-    function savedTasks() {
-        let saveData = {};
-        for(timeCurrent in time) {
-            saveData[timeCurrent[time]] = "";
-        }
-        localStorage.setItem("task-tracker", JSON.stringify(saveData));
-    }
+    hourEl.append(saveButtonEl);
 
-console.log("task-tracker");
     
+    saveButtonEl.click( function(event) {
+        
+        let inputText = $(event.target).parent().children("input").val();
+        let hour = $(event.target).parent().children("h2").text();
+
+        
+        let saveData = JSON.parse(localStorage.getItem("task-tracker"));
+        saveData[hour] = inputText;
+
+        
+        localStorage.setItem("task-tracker", JSON.stringify(saveData));
+    } );
+}
+//am pm removal, palce in container
+//style changes?
+//setCurrentDay(now);
+// Create the hour element, stick with time or reverse?
+// tag time elements to place in column
+//remember red
+// allow text input at time
+// save button create, remove hour element
+ //validate time at current time, establish value for color
+// push tasks to local storage
 // track on click, tie time and task and set item
 // reformate for simplier function
-    saveButtonEl.click( function(event) {
-        let inputText = $(event.target).parent().children("input").val();
-        let time = $(event.target).parent().children("h2").text();
-    let saveData = JSON.parse(localStorage.getItem("task-tracker"));
-        saveData[hour] = inputText;
-        localStorage.setItem("task tracker", JSON.stringify(saveData));
-    } );
-console.log("task-tracker");
+
+function initializeStorage() {
+    let saveData = {};
+    for(time in militaryTime) {
+        saveData[militaryTime[time]] = "";
+    }
+    localStorage.setItem("task-tracker", JSON.stringify(saveData));
+}
+
