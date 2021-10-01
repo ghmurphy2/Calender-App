@@ -21,7 +21,7 @@ setInterval( function(){
     now = moment();
     setCurrentDay(now);
 
-    for(hour in hours) {
+    for(time in hours) {
         setBackgroundByTime(timeEl[hour], hours[hour], now);
     }
 }, 1000 );
@@ -33,9 +33,4 @@ for(var time in hours) {
     timeEl.addClass("row time-block");
     container.append(timeEl);
     timeEls.push(timeEl);
-
-
-
-// format time and day
-//function setCurrentDay(now) {
-    //timeEl.text(now.format("MM DD, YYYY"));
+}
